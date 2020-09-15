@@ -1,0 +1,14 @@
+{application, erlidata_lib,
+ [{description, "A library to interact with Wikidata"},
+  {vsn, "0.0.1"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib,
+    inets
+   ]},
+  {env,[]},
+  {modules, [erlidata_lib]},
+  {licenses, []},
+  {links, []}
+ ]}.
