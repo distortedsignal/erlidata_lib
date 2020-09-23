@@ -8,7 +8,7 @@
     inets
    ]},
   {env,[]},
-  {modules, [erlidata_lib]},
+  {modules, [erlidata_lib, erlidata_lib_query]},
   {licenses, []},
   {links, []}
  ]}.

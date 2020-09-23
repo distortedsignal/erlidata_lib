@@ -5,7 +5,7 @@
 
 -type query_return() ::
     {ok, proplists:proplist()} |
-    {error, string() | term()}.
+    {error, term()}.
 
 -spec query(string()) -> query_return().
 query(Url) -> erlidata_lib_query:query(Url).
