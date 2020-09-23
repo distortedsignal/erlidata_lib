@@ -3,7 +3,11 @@
 -export([query/1, query/2]).
 -export([make_query_client/1]).
 
--spec query(string()) -> any().
+-type query_return() ::
+    {ok, proplists:proplist()} |
+    {error, string() | term()}.
+
+-spec query(string()) -> query_return().
 query(URL) ->
     case application:ensure_started(inets) of
         ok ->
@@ -12,12 +16,12 @@ query(URL) ->
         Error -> Error
     end.
 
--spec query(string(), string()) -> any().
+-spec query(string(), string()) -> query_return().
 query(RootURL, SparqlQuery) ->
     query(RootURL ++ SparqlQuery).
 
 -spec make_query_client(string()) ->
-    fun((string) -> any()).
+    fun((string()) -> query_return()).
 make_query_client(RootURL) ->
     fun(SparqlQuery) -> query(RootURL, SparqlQuery) end.
 
