@@ -3,6 +3,7 @@
 -export([query/1, query/2]).
 -export([make_query_client/1]).
 
+%% Takes a url-encoded string, GETs it, and returns the outcome.
 -spec query(string()) -> erlidata_lib:query_return().
 query(URL) ->
     case application:ensure_started(inets) of
