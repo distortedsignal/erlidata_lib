@@ -55,10 +55,14 @@ An OTP Library for consuming Wikidata in a sane fashion
 ```
 
 #### Make and use a query client
-```
-> QueryClient = erlidata_lib:make_query_client("https://query.wikidata.org/").
+```erl
+> QueryClient = erlidata_lib:make_query_client("https://query.wikidata.org/sparql?query=").
 ....
-> QueryClient("sparql?query=%23Goats%0ASELECT%20%3Fitem%20%3FitemLabel%20WHERE%20%7B%20%3Fitem%20wdt%3AP31%20wd%3AQ2934.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%7D").
+% Query with escaped SPARQL
+> QueryClient("SELECT%20%3Fitem%20%3FitemLabel%20WHERE%20%7B%20%3Fitem%20wdt%3AP31%20wd%3AQ2934.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22%5BAUTO_LANGUAGE%5D%2Cen%22.%20%7D%7D").
+....
+% Query with unescaped SPARQL
+> QueryClient("SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q2934. SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}").
 ```
 
 ## Build
