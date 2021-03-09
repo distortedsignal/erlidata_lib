@@ -7,9 +7,7 @@
 -spec query(string()) -> erlidata_lib:query_return().
 query(URL) ->
     case application:ensure_started(inets) of
-        ok ->
-            Headers = erlidata_lib_common:make_headers(),
-            erlidata_lib_common:handle_response(httpc:request(get, {URL, Headers}, [], []));
+        ok -> erlidata_lib_common:handle_response(erlidata_lib_common:make_request(URL));
         Error -> Error
     end.
 
@@ -20,4 +18,4 @@ query(RootURL, SparqlQuery) ->
 -spec make_query_client(string()) ->
     fun((string()) -> erlidata_lib:query_return()).
 make_query_client(RootURL) ->
-    fun(SparqlQuery) -> query(RootURL, SparqlQuery) end.
+    fun(SparqlQuery) -> erlidata_lib_common:client_get(fun query/2, RootURL, SparqlQuery) end.
